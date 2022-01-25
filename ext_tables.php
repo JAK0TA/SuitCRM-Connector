@@ -6,9 +6,9 @@ defined('TYPO3_MODE') || exit('Access denied.');
 
 (function () {
   \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-    'suitcrm_connector',
+    'JAKOTA.suitecrm_connector',
     'tools',
-    'suitcrm_settings',
+    'connectorsettings',
     'top',
     [
       SuiteCrmConnectorController::class => 'settings',
