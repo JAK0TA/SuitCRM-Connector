@@ -1,0 +1,23 @@
+
+# Module configuration
+module.tx_suitecrmconnector_tools_suitecrmconnectorsuitecrmsettings {
+    persistence {
+        storagePid = {$module.tx_suitecrmconnector_suitecrmsettings.persistence.storagePid}
+    }
+    view {
+        templateRootPaths.0 = EXT:suitecrm_connector/Resources/Private/Templates/
+        templateRootPaths.1 = {$module.tx_suitecrmconnector_suitecrmsettings.view.templateRootPath}
+        partialRootPaths.0 = EXT:suitecrm_connector/Resources/Private/Partials/
+        partialRootPaths.1 = {$module.tx_suitecrmconnector_suitecrmsettings.view.partialRootPath}
+        layoutRootPaths.0 = EXT:suitecrm_connector/Resources/Private/Layouts/
+        layoutRootPaths.1 = {$module.tx_suitecrmconnector_suitecrmsettings.view.layoutRootPath}
+    }
+}
+
+plugin.tx_powermail.settings.setup {
+    finishers {
+        5 {
+            class = JAKOTA\SuitecrmConnector\Finisher\SuiteCrmFinisher
+        }
+    }
+}

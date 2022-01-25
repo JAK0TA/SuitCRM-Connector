@@ -1,0 +1,70 @@
+<div xmlns:f="http://typo3.org/ns/fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers">
+    <f:be.container >
+        <div class="module" data-module-id="" data-module-name="">
+            <div class="module-docheader t3js-module-docheader">
+                <div class="module-docheader-bar module-docheader-bar-navigation t3js-module-docheader-bar t3js-module-docheader-bar-navigation">
+
+                    <div class="module-docheader-bar-column-left">
+
+                    </div>
+                    <div class="module-docheader-bar-column-right">
+
+                    </div>
+                </div>
+                <div class="module-docheader-bar module-docheader-bar-buttons t3js-module-docheader-bar t3js-module-docheader-bar-buttons">
+                    <div class="module-docheader-bar-column-left">
+
+                    </div>
+                    <div class="module-docheader-bar-column-right">
+                        <div class="btn-toolbar" role="toolbar" aria-label="">
+                            <div class="btn-group" role="group" aria-label="">
+                                <f:be.buttons.shortcut />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="module-body t3js-module-body">
+                <f:flashMessages />
+                <f:if condition="{crmApiUser}">
+                    <f:then><f:be.infobox title="Connection Established" message="The session id is: {crmApiUser.id}" state="0" iconName="check" /></f:then>
+                    <f:else><f:be.infobox title="No Connection" message="{crmApiLoginStatus}" state="2" iconName="exclamation-triangle" /></f:else>
+                </f:if>
+
+                <h1>API Connection Settings</h1>
+                <f:form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="url" class="col-sm-2 control-label">URL</label>
+                        <div class="col-sm-10">
+                            <f:form.textfield class="form-control" id="url" name="crmApiSettings[url]" value="{crmApiSettings.url}" placeholder="https://example.com/suite/service/v4_1/rest.php"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user" class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                            <f:form.textfield class="form-control" id="user" name="crmApiSettings[user]" value="{crmApiSettings.user}" placeholder="API Username"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <f:form.textfield class="form-control" id="password" name="crmApiSettings[password]" value="{crmApiSettings.password}" placeholder="API Password"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="application" class="col-sm-2 control-label">Application Name</label>
+                        <div class="col-sm-10">
+                            <f:form.textfield class="form-control" id="application" name="crmApiSettings[application]" value="{crmApiSettings.application}" placeholder="TYPO3"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Save Settings</button>
+                        </div>
+                    </div>
+                </f:form>
+
+            </div>
+        </div>
+    </f:be.container>
+</div>

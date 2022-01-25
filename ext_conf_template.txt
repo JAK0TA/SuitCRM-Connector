@@ -1,0 +1,11 @@
+# cat=basic; type=input; label=URL
+url =
+
+# cat=basic; type=input; label=Username
+user =
+
+# cat=basic; type=input; label=Password
+password =
+
+# cat=basic; type=input; label=Application Name
+application =
