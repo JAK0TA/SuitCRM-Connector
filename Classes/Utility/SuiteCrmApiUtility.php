@@ -2,7 +2,10 @@
 
 namespace JAKOTA\SuitecrmConnector\Utility;
 
+use JAKOTA\LueftnerTheme\Utillity\DebuggerUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Log\Logger;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /*
  *  Copyright notice
@@ -29,73 +32,25 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
  */
 
 class SuiteCrmApiUtility {
-  /**
-   * apiApplication.
-   *
-   * @var string The application name for API usage
-   */
-  protected $apiApplication = '';
+  protected string $apiApplication;
 
-  /**
-   * apiPassword.
-   *
-   * @var string The password of CRM user to use the API
-   */
-  protected $apiPassword = '';
+  protected string $apiPassword;
 
-  /**
-   * apiURL.
-   *
-   * @var string The Url for the API
-   */
-  protected $apiURL = 'https://crm.hansesail.com/suite/service/v4_1/rest.php';
+  protected string $apiURL;
 
-  /**
-   * apiUser.
-   *
-   * @var array|bool Api user response
-   */
-  protected $apiUser = false;
+  protected mixed $apiUser = false;
 
-  /**
-   * apiUsername.
-   *
-   * @var string Username of CRM user to use the API
-   */
-  protected $apiUsername = '';
+  protected string $apiUsername;
 
-  /**
-   * configurationUtility.
-   *
-   * @var \TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility
-   */
-  protected $configurationUtility;
+  protected ExtensionConfiguration $configurationUtility;
 
-  /**
-   * @var \TYPO3\CMS\Core\Log\LogManager
-   */
-  protected $log;
+  protected Logger $log;
 
-  /**
-   * loginStatus.
-   *
-   * @var string
-   */
-  protected $loginStatus = '';
+  protected string $loginStatus;
 
-  /**
-   * objectManager.
-   *
-   * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-   */
-  protected $objectManager;
+  protected ObjectManager $objectManager;
 
-  /**
-   * timeout.
-   *
-   * @var string Timeout for http connection in seconds
-   */
-  protected $timeout = 15;
+  protected int $timeout = 15;
 
   /**
    * Constructor.
@@ -110,8 +65,7 @@ class SuiteCrmApiUtility {
     $this->loadSettings($crmApiSettings);
 
     // INIT the TYPO§ Logger Logs can be found in /typo3temp/logs/typo3.log
-    $this->log = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
-
+    $this->log = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Log\LogManager::class)->getLogger(__CLASS__);
     // Initiate the Login
     $this->doLogin();
   }
@@ -124,10 +78,10 @@ class SuiteCrmApiUtility {
    *
    * @return bool
    */
-  public function call($method, $parameters) {
+  public function call($method, $parameters): mixed {
     //Try to fill the session id
     if ($this->apiUser && !array_key_exists('session', $parameters) && 'login' != $method) {
-      $parameters = array_merge_recursive(['session' => $this->apiUser->id], $parameters);
+      $parameters = array_merge_recursive(['session' => $this->apiUser['id']], $parameters);
     }
 
     try {
@@ -163,10 +117,8 @@ class SuiteCrmApiUtility {
    * Formats a PHP associative array to a crm api compatible name-value list.
    *
    * @param $source
-   *
-   * @return array
    */
-  public function formatNameValueList($source) {
+  public function formatNameValueList($source): array {
     $nameValueList = [];
     foreach ($source as $name => $value) {
       $nameValueList[] = [
@@ -180,28 +132,22 @@ class SuiteCrmApiUtility {
 
   /**
    * Returns the login request answer as array, if the login failed this will be false.
-   *
-   * @return array|bool
    */
-  public function getApiUser() {
+  public function getApiUser(): array|bool {
     return $this->apiUser;
   }
 
   /**
    * Returns the login status, if everything is fine this will be 'OK' otherwise this contains a error.
-   *
-   * @return string
    */
-  public function getLoginStatus() {
+  public function getLoginStatus(): string {
     return $this->loginStatus;
   }
 
   /**
    * Returns the settings as array.
-   *
-   * @return array
    */
-  public function getSettings() {
+  public function getSettings(): array {
     return [
       'url' => $this->apiURL,
       'user' => $this->apiUsername,
@@ -215,8 +161,9 @@ class SuiteCrmApiUtility {
    *
    * @param $crmApiSettings
    */
-  public function setSettings($crmApiSettings) {
-    $this->configurationUtility->writeConfiguration($crmApiSettings, 'suitecrm_connector');
+  public function setSettings($crmApiSettings): void {
+    DebuggerUtility::var_dump($crmApiSettings);
+    $this->configurationUtility->set('suitecrm_connector', $crmApiSettings);
     $this->loadSettings($crmApiSettings);
     $this->doLogin();
   }
@@ -224,7 +171,7 @@ class SuiteCrmApiUtility {
   /**
    * Sends a Login request to the api url.
    */
-  protected function doLogin() {
+  protected function doLogin(): void {
     // Try to login
     $response = $this->call('login', [
       'user_auth' => [
@@ -259,7 +206,7 @@ class SuiteCrmApiUtility {
    *
    * @param $crmApiSettings array
    */
-  protected function loadSettings($crmApiSettings) {
+  protected function loadSettings($crmApiSettings): void {
     $this->apiURL = $crmApiSettings['url'];
     $this->apiUsername = $crmApiSettings['user'];
     $this->apiPassword = $crmApiSettings['password'];
