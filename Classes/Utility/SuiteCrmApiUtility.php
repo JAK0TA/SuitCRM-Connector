@@ -2,7 +2,7 @@
 
 namespace JAKOTA\SuitecrmConnector\Utility;
 
-use JAKOTA\LueftnerTheme\Utillity\DebuggerUtility;
+use stdClass;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -133,7 +133,7 @@ class SuiteCrmApiUtility {
   /**
    * Returns the login request answer as array, if the login failed this will be false.
    */
-  public function getApiUser(): array|bool {
+  public function getApiUser(): array|bool|stdClass {
     return $this->apiUser;
   }
 
@@ -162,7 +162,6 @@ class SuiteCrmApiUtility {
    * @param $crmApiSettings
    */
   public function setSettings($crmApiSettings): void {
-    DebuggerUtility::var_dump($crmApiSettings);
     $this->configurationUtility->set('suitecrm_connector', $crmApiSettings);
     $this->loadSettings($crmApiSettings);
     $this->doLogin();
