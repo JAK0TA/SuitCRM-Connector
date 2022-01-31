@@ -81,7 +81,7 @@ class SuiteCrmApiUtility {
   public function call($method, $parameters): mixed {
     //Try to fill the session id
     if ($this->apiUser && !array_key_exists('session', $parameters) && 'login' != $method) {
-      $parameters = array_merge_recursive(['session' => $this->apiUser['id']], $parameters);
+      $parameters = array_merge_recursive(['session' => $this->apiUser->id], $parameters);
     }
 
     try {
