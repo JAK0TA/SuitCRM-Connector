@@ -76,7 +76,7 @@ class SuiteCrmApiUtility {
    * @param $method
    * @param $parameters
    *
-   * @return bool
+   * @return mixed
    */
   public function call($method, $parameters): mixed {
     //Try to fill the session id
