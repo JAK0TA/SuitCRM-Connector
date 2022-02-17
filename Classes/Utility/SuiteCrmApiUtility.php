@@ -212,7 +212,7 @@ class SuiteCrmApiUtility {
    *
    * @param $crmApiSettings array
    */
-  protected function loadSettings($crmApiSettings): void {
+  protected function loadSettings(array $crmApiSettings): void {
     $this->apiURL = $crmApiSettings['url'];
     $this->apiUsername = $crmApiSettings['user'];
     $this->apiPassword = $crmApiSettings['password'];
