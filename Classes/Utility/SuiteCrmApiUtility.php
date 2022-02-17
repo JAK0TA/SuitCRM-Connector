@@ -86,7 +86,7 @@ class SuiteCrmApiUtility {
 
     try {
       $curl_request = curl_init();
-      curl_setopt($curl_request, CURLOPT_URL, $this->apiURL);
+      curl_setopt($curl_request, CURLOPT_URL, $this->getApiUrl());
       curl_setopt($curl_request, CURLOPT_POST, 1);
       curl_setopt($curl_request, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
       curl_setopt($curl_request, CURLOPT_HEADER, 1);
@@ -156,6 +156,13 @@ class SuiteCrmApiUtility {
     ];
   }
 
+  /**
+   * Returns the api url.
+   */
+  public function getApiUrl(): ?string {
+    return $this->apiURL;
+  }
+  
   /**
    * Writes the settings in ext_conf and try a login with the new settings.
    *
