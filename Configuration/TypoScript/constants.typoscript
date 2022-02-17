@@ -1,14 +1,14 @@
-module.tx_suitecrmconnector_connectorsettings {
+module.tx_suitecrmconnector {
 	view {
-    # cat=module.tx_suitecrmconnector_suitecrmsettings/file; type=string; label=Path to template root (BE)
+    # cat=module.tx_suitecrmconnector/file; type=string; label=Path to template root (BE)
     templateRootPath = EXT:suitecrm_connector/Resources/Private/Templates/
-    # cat=module.tx_suitecrmconnector_suitecrmsettings/file; type=string; label=Path to template partials (BE)
+    # cat=module.tx_suitecrmconnector/file; type=string; label=Path to template partials (BE)
     partialRootPath = EXT:suitecrm_connector/Resources/Private/Partials/
-    # cat=module.tx_suitecrmconnector_suitecrmsettings/file; type=string; label=Path to template layouts (BE)
+    # cat=module.tx_suitecrmconnector/file; type=string; label=Path to template layouts (BE)
     layoutRootPath = EXT:suitecrm_connector/Resources/Private/Layouts/
 	}
 	persistence {
-    # cat=module.tx_suitecrmconnector_suitecrmsettings//a; type=string; label=Default storage PID
+    # cat=module.tx_suitecrmconnector//a; type=string; label=Default storage PID
     storagePid =
 	}
 }

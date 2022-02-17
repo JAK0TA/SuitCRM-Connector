@@ -1,10 +1,10 @@
-module.tx_suitecrmconnector_web_suitecrmconnectorconnectorsettings {
+module.tx_suitecrmconnector {
 	persistence {
-		storagePid = {$module.tx_suitecrmconnector_suitecrmsettings.persistence.storagePid}
+		storagePid = {$module.tx_suitecrmconnector.persistence.storagePid}
 	}
 	view {
-		templateRootPaths.0 = {$module.tx_suitecrmconnector_connectorsettings.view.templateRootPath}
-		partialRootPaths.0 = {$module.tx_suitecrmconnector_connectorsettings.view.partialRootPath}
-		layoutRootPaths.0 = {$module.tx_suitecrmconnector_connectorsettings.view.layoutRootPath}
+		templateRootPaths.0 = {$module.tx_suitecrmconnector.view.templateRootPath}
+		partialRootPaths.0 = {$module.tx_suitecrmconnector.view.partialRootPath}
+		layoutRootPaths.0 = {$module.tx_suitecrmconnector.view.layoutRootPath}
 	}
 }
