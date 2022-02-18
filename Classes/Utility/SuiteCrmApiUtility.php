@@ -210,7 +210,7 @@ class SuiteCrmApiUtility {
   /**
    * Loads the settings from an array.
    *
-   * @param $crmApiSettings array
+   * @param array<string, mixed> $crmApiSettings
    */
   protected function loadSettings(array $crmApiSettings): void {
     $this->apiURL = $crmApiSettings['url'];
