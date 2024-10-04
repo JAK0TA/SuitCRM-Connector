@@ -2,9 +2,27 @@
   "name": "jakota/suitecrm-connector",
   "type": "typo3-cms-extension",
   "description": "A Connector for a SuiteCRM Installation. It uses the Rest API.",
+  "license": [
+    "GPL-2.0-or-later"
+  ],
+  "authors": [
+    {
+      "name": "JAKOTA Design Group GmbH",
+      "role": "Developer"
+    },
+    {
+      "name": "Michael Krohn",
+      "role": "Developer"
+    },
+    {
+      "name": "Nicklas Mantek",
+      "role": "Developer"
+    }
+  ],
   "require": {
     "php": "^8.0",
-    "typo3/cms-core": "^11.5"
+    "typo3/cms-core": "^11.5",
+    "typo3/cms-fluid": "^11.5"
   },
   "autoload": {
     "psr-4": {
