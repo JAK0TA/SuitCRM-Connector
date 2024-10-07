@@ -39,7 +39,7 @@ Configuration Steps:
 - Save the settings to activate the connection.
 
 ## Authors
-- Martin Fünning (fünning@jakota.de)
+- Martin Fünning (fuenning@jakota.de)
 - Michael Krohn (krohn@jakota.de)
 
 ## License
