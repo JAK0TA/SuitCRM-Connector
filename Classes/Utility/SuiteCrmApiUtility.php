@@ -2,9 +2,10 @@
 
 namespace JAKOTA\SuitecrmConnector\Utility;
 
-use stdClass;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Log\Logger;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /*
@@ -57,29 +58,24 @@ class SuiteCrmApiUtility {
    */
   public function __construct() {
     // Get the ObjectManager and the ConfigurationUtility
-    $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
-    $this->configurationUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ExtensionConfiguration::class);
+    $this->objectManager = GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+    $this->configurationUtility = GeneralUtility::makeInstance(ExtensionConfiguration::class);
 
     // Load the CRM connection settings from the ext_conf
     $crmApiSettings = $this->configurationUtility->get('suitecrm_connector');
     $this->loadSettings($crmApiSettings);
 
     // INIT the TYPO§ Logger Logs can be found in /typo3temp/logs/typo3.log
-    $this->log = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Log\LogManager::class)->getLogger(__CLASS__);
+    $this->log = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
     // Initiate the Login
     $this->doLogin();
   }
 
   /**
    * Sends a post request to the crm api.
-   *
-   * @param $method
-   * @param $parameters
-   *
-   * @return mixed
    */
-  public function call($method, $parameters): mixed {
-    //Try to fill the session id
+  public function call(string $method, mixed $parameters): mixed {
+    // Try to fill the session id
     if ($this->apiUser && !array_key_exists('session', $parameters) && 'login' != $method) {
       $parameters = array_merge_recursive(['session' => $this->apiUser->id], $parameters);
     }
@@ -116,7 +112,7 @@ class SuiteCrmApiUtility {
   /**
    * Formats a PHP associative array to a crm api compatible name-value list.
    *
-   * @param $source
+   * @param mixed $source
    */
   public function formatNameValueList($source): array {
     $nameValueList = [];
@@ -131,9 +127,16 @@ class SuiteCrmApiUtility {
   }
 
   /**
+   * Returns the api url.
+   */
+  public function getApiUrl(): ?string {
+    return $this->apiURL;
+  }
+
+  /**
    * Returns the login request answer as array, if the login failed this will be false.
    */
-  public function getApiUser(): array|bool|stdClass {
+  public function getApiUser(): array|bool|\stdClass {
     return $this->apiUser;
   }
 
@@ -157,16 +160,9 @@ class SuiteCrmApiUtility {
   }
 
   /**
-   * Returns the api url.
-   */
-  public function getApiUrl(): ?string {
-    return $this->apiURL;
-  }
-  
-  /**
    * Writes the settings in ext_conf and try a login with the new settings.
    *
-   * @param $crmApiSettings
+   * @param mixed $crmApiSettings
    */
   public function setSettings($crmApiSettings): void {
     $this->configurationUtility->set('suitecrm_connector', $crmApiSettings);
