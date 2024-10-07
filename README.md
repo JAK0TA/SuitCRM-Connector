@@ -39,8 +39,8 @@ Configuration Steps:
 - Save the settings to activate the connection.
 
 ## Authors
-- Martin Fünning (fuenning@jakota.de)
-- Michael Krohn (krohn@jakota.de)
+- Martin Fünning
+- Michael Krohn
 
 ## License
 This package is licensed under GPL-2.0-or-later.
