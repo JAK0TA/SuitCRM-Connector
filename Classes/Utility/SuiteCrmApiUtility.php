@@ -6,7 +6,6 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /*
  *  Copyright notice
@@ -49,7 +48,6 @@ class SuiteCrmApiUtility {
 
   protected string $loginStatus;
 
-  protected ObjectManager $objectManager;
 
   protected int $timeout = 15;
 
@@ -57,8 +55,6 @@ class SuiteCrmApiUtility {
    * Constructor.
    */
   public function __construct() {
-    // Get the ObjectManager and the ConfigurationUtility
-    $this->objectManager = GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
     $this->configurationUtility = GeneralUtility::makeInstance(ExtensionConfiguration::class);
 
     // Load the CRM connection settings from the ext_conf
