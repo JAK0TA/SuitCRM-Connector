@@ -39,7 +39,7 @@ class SuiteCrmConnectorController extends ActionController {
   /**
    * Settings Action - For SuiteCRM settings in the backend.
    */
-  public function settingsAction() {
+  public function settingsAction(): \Psr\Http\Message\ResponseInterface {
     if ($this->request->hasArgument('crmApiSettings')) {
       $crmApiSettings = $this->request->getArgument('crmApiSettings');
       $this->view->assign('crmApiSettings', $crmApiSettings);
@@ -49,5 +49,6 @@ class SuiteCrmConnectorController extends ActionController {
     }
     $this->view->assign('crmApiUser', $this->suiteCrmApiUtility->getApiUser());
     $this->view->assign('crmApiLoginStatus', $this->suiteCrmApiUtility->getLoginStatus());
+    return $this->htmlResponse();
   }
 }
