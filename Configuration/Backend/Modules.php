@@ -1,9 +1,9 @@
 <?php
 
-use JAKOTA\SuitecrmConnector\Controller\SuiteCrmConnectorController;
-
 // Copyright JAKOTA Design Group GmbH. All rights reserved.
 declare(strict_types=1);
+
+use JAKOTA\SuitecrmConnector\Controller\SuiteCrmConnectorController;
 
 return [
   'web_module' => [
